@@ -12,28 +12,28 @@ Group #4
  */
 package aleatorio;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Arrays;
+import java.util.Random;
 
 public class Main {
 
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 
-		//To save menu item
 		int item;
 		//To count input item #1
 		int i = 0;
 		//To save every id
-		int[] array = new int[10];
+                ArrayList lista = new ArrayList();
 		//To ask name and put on scanner
 		String nombre;
-
-		//To save data on index vector
-		Generador generador[] = new Generador[10];
+                int numeroRandom;
+                 Random rd = new Random();
+       
 		//To generate random number
-		Generador generadorid = new Generador(-1, "");
-
+		Generador generador[] = new Generador[10];
 		System.out.println("**************** Bienvenido al sistema de registro estudiantil ****************");
 		do {
 			//Show menu
@@ -46,15 +46,27 @@ public class Main {
 
 			switch (item) {
 				case 1: {
-					//No more that 10 names
 					if (i < 10) {
 						System.out.print("Ingrese su nombre: ");
 						//Ask name
 						nombre = input.next();
-						//Set a random number
-						generador[i] = new Generador(generadorid.setRandom(), nombre);
+                                                int repetido=0;
+                                             
+                                                do{
+                                                    numeroRandom = rd.nextInt(11);;
+                                                    if(lista.contains(numeroRandom)){
+                                                        repetido=1;
+                                                    }
+                                                    else{
+                                                        repetido=0;
+                                                        lista.add(numeroRandom);
+                                                    }
+                                                }while(repetido==1);
+                                                
+						generador[i] = new Generador(numeroRandom, nombre);
 						//Save name
 						generador[i].setNombre(nombre);
+
 						//Show if was saved
 						System.out.println("-------------------------------");
 						System.out.println("ID: " + generador[i].getId() + " | " + "Nombre: " + generador[i].getNombre());
@@ -65,7 +77,7 @@ public class Main {
 						System.out.println("\nRegistrados: " + i);
 						System.out.println("-------------------------------");
 						item = 0;
-						//Make nothing when counter get 10
+
 					} else {
 						System.out.println("\nError. límite de usuarios: 10\n");
 						item = 0;
@@ -74,33 +86,24 @@ public class Main {
 
 				}
 				case 2: {
-					//Just if there are data
-					if (i > 0) {
+					if (i == 10) {
+                                                Arrays.sort(generador);
 						System.out.println("\nConsultado listado...");
 						item = 0;
-						//To order array list
-						Arrays.sort(array);
+                                                
+                                                for (int in=0;in<generador.length;in++) {
+							System.out.print("ID: " + generador[in].getId() + " | ");
+							System.out.print("Nombre: " + generador[in].getNombre() + "\n");
 
-						//Assign generator data to array
-						for (int j = 0; j < i; j++) {
-							array[j] = generador[j].getId();
-						}
-						//To show 10 times
-						for (int x = 0; x < array.length; x++) {
-							//just if there are not 0
-							if (array[x] > 0) {
-								System.out.print("ID: " + array[x] + " | ");
-								System.out.print("Nombre: " + generador[x].getNombre() + "\n");
-							}
 						}
 						System.out.println("");
-						//Make nothing when there are not data
 					} else {
-						System.out.println("\nLo sentimos, no encontramos datos en el registro\n");
+						System.out.println("\nLo sentimos, para mostrar los datos debe ingresar los 10 registros completos\n");
 						item = 0;
 					}
 					break;
 				}
+
 				case 3: {
 					//Show close system message
 					System.out.println("\nProcesando petición...");
@@ -116,7 +119,8 @@ public class Main {
 				}
 			}
 			//Keep menu on all the time
-		} while (item == 0);
+
+		} while (item== 0);
 	}
 
 }
