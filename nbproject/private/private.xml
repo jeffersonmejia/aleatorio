@@ -3,8 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/D:/Downloads/Aleatorio/src/aleatorio/Menu.java</file>
             <file>file:/D:/Downloads/Aleatorio/src/aleatorio/Main.java</file>
+=======
+            <file>file:/C:/Users/Usuario/Downloads/Aleatorio/Aleatorio/src/aleatorio/Main.java</file>
+            <file>file:/C:/Users/Usuario/Downloads/Aleatorio/Aleatorio/src/aleatorio/Generador.java</file>
+>>>>>>> c4cf91e8fe79c6aae8c7c09ff1b5bd6789304f2e
         </group>
     </open-files>
 </project-private>
